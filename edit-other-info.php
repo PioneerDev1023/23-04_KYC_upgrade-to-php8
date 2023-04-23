@@ -8,15 +8,15 @@
 
 	
 
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user = mysql_fetch_array($qry);
+	$user = $qry->fetch_array();
 
 	
 
-	$user_doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
+	$user_doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user_doc_res = mysql_fetch_array($user_doc_qry);
+	$user_doc_res = $user_doc_qry->fetch_array();
 
 	
 
@@ -30,7 +30,7 @@
 			
 			
 		
-			$qry = mysql_query("update `dynamic_value` set `value`='".$_REQUEST['name']."',`updated_date`='".date('Y-m-d H:i:s')."' where `dynamic_value_id`='".$_REQUEST['data_id']."' ");
+			$qry = $conn->query("update `dynamic_value` set `value`='".$_REQUEST['name']."',`updated_date`='".date('Y-m-d H:i:s')."' where `dynamic_value_id`='".$_REQUEST['data_id']."' ");
 
 			
 
@@ -116,9 +116,9 @@
 
 																   <?php
 
-                                                                        $d_qry = mysql_query("select * from `dynamic_value` where `dynamic_value_id`='".$_REQUEST['data_id']."' ");
+                                                                        $d_qry = $conn->query("select * from `dynamic_value` where `dynamic_value_id`='".$_REQUEST['data_id']."' ");
 
-                                                                        $data = mysql_fetch_array($d_qry);
+                                                                        $data = $d_qry->fetch_array();
 
                                                                         
 

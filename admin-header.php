@@ -2,9 +2,9 @@
 
 	require_once("conn.php");
 
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$admin = mysql_fetch_array($qry);
+	$admin = $qry->fetch_array();
 	
 	if(!$admin || $admin['type'] != 1)
 	{
@@ -48,7 +48,7 @@
 	
 	$manage_users = "";
 
-	if($uri_segments[2] == 'admin-dashboard.php')
+    if($uri_segments[1] == 'admin-dashboard.php')
 
 	{
 
@@ -58,7 +58,7 @@
 
 	}
 
-	else if($uri_segments[2] == 'report.php')
+	else if($uri_segments[1] == 'report.php')
 
 	{
 
@@ -68,7 +68,7 @@
 
 	}
 
-	else if($uri_segments[2] == 'kyc-form.php' )
+	else if($uri_segments[1] == 'kyc-form.php' )
 
 	{
 
@@ -78,7 +78,7 @@
 
 	}
 
-	else if($uri_segments[2] == 'new-kyc.php' )
+	else if($uri_segments[1] == 'new-kyc.php' )
 
 	{
 
@@ -88,7 +88,7 @@
 
 	}
 
-	else if($uri_segments[2] == 'edit-kyc.php' )
+	else if($uri_segments[1] == 'edit-kyc.php' )
 
 	{
 
@@ -98,7 +98,7 @@
 
 	}
 
-	else if($uri_segments[2] == 'update-info.php')
+	else if($uri_segments[1] == 'update-info.php')
 
 	{
 
@@ -108,7 +108,7 @@
 
 	}
 	
-	else if($uri_segments[2] == 'contacts.php')
+	else if($uri_segments[1] == 'contacts.php')
 
 	{
 
@@ -118,7 +118,7 @@
 
 	}
 	
-	else if($uri_segments[2] == 'manage-blog.php' || $uri_segments[2] == 'new-blog.php' || $uri_segments[2] == 'edit-blog.php' || $uri_segments[2] =='blog-comment.php')
+	else if($uri_segments[1] == 'manage-blog.php' || $uri_segments[1] == 'new-blog.php' || $uri_segments[1] == 'edit-blog.php' || $uri_segments[1] =='blog-comment.php')
 
 	{
 
@@ -128,7 +128,7 @@
 
 	}
 	
-	else if($uri_segments[2] == 'manage-users.php')
+	else if($uri_segments[1] == 'manage-users.php')
 
 	{
 
@@ -137,6 +137,12 @@
 		$current_page = "Manage Users";
 
 	}
+
+    else
+
+    {
+        echo "ocurred error in uri_segments(contact email: pioneerdev1023@gmail.com)";
+    }
 
 		
 

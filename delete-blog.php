@@ -4,7 +4,7 @@
 
 	$blog_id = $_REQUEST['blog_id'];
 
-	$qry = mysql_query("delete from `blog` where `blog_id`='".$blog_id."'  ");
+	$qry = $conn->query("delete from `blog` where `blog_id`='".$blog_id."'  ");
 
 		
 

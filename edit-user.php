@@ -7,8 +7,8 @@
 	require_once("admin-header.php");
 
 	$user_id = $_REQUEST['user_id'];
-	$user_qry = mysql_query("select * from `users` where `user_id`='".$user_id."' ");
-	$user_data = mysql_fetch_array($user_qry);
+	$user_qry = $conn->query("select * from `users` where `user_id`='".$user_id."' ");
+	$user_data = $user_qry->fetch_array();
 	
 
 	if(isset($_REQUEST['edit-user']))
@@ -30,25 +30,25 @@
 		move_uploaded_file($_FILES['user_image']['tmp_name'],'documents/'.$file_name);
 		
 				if($password == ""){
-					$qry = mysql_query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."', `image`='".$file_name."', `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
+					$qry = $conn->query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."', `image`='".$file_name."', `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
 				}else{
-					$qry = mysql_query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."', `image`='".$file_name."',`password`='".md5($password)."', `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
+					$qry = $conn->query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."', `image`='".$file_name."',`password`='".md5($password)."', `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
 				}
 
 		}
 		else
 		{
 				if($password == ""){
-					$qry = mysql_query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."',  `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
+					$qry = $conn->query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."',  `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
 				}else{
-					$qry = mysql_query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."', `password`='".md5($password)."', `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
+					$qry = $conn->query("update `users` set `user_name`='".$user_name."',`country_id`='".$country_id."',`region`='".$region."',`city`='".$city."', `password`='".md5($password)."', `updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$user_id."' ");
 				}
 		}
 		
 		if($user_data['country_id'] != $country_id || $user_data['region'] != $region)
 		{
-			$qry = mysql_query("delete from `user_documents` where `user_id`='".$user_id."'  ");
-			$qry = mysql_query("delete from `dynamic_value` where `user_id`='".$user_id."'  ");
+			$qry = $conn->query("delete from `user_documents` where `user_id`='".$user_id."'  ");
+			$qry = $conn->query("delete from `dynamic_value` where `user_id`='".$user_id."'  ");
 		}
 		
 		$message = "User updated successfully.";
@@ -125,10 +125,10 @@
                                                 <select name="country_id" id="country_list" class="select2 form-control">
                                                     <option value=""></option>
                                                     <?php
-                                                        $country = mysql_query("select DISTINCT(`country_id`) from `kyc_list`");
-                                                        while($res = mysql_fetch_array($country)){
-                                                            $country_qry = mysql_query("select * from `country` where `country_id`='".$res['country_id']."' ");
-                                                            $country_data = mysql_fetch_array($country_qry);
+                                                        $country = $conn->query("select DISTINCT(`country_id`) from `kyc_list`");
+                                                        while($res = $country->fetch_array()){
+                                                            $country_qry = $conn->query("select * from `country` where `country_id`='".$res['country_id']."' ");
+                                                            $country_data = $country_qry->fetch_array();
 															
 															if($res['country_id'] == $user_data['country_id'] )
 															{
@@ -151,8 +151,8 @@
                                                 <select name="region" id="signup_region" class="form-control" > 
                                                     <option value="">Select Region</option>
                                                     <?php
-														$region = mysql_query("select `region_name` from `kyc_list` where `country_id`='".$user_data['country_id']."' ");
-                                                        while($res = mysql_fetch_array($region)){
+														$region = $conn->query("select `region_name` from `kyc_list` where `country_id`='".$user_data['country_id']."' ");
+                                                        while($res = $region->fetch_array()){
                                                             if($res['region_name'] == $user_data['region'] )
 															{
 																$selected = "selected";

@@ -119,9 +119,9 @@
 
                                                 <?php
 
-													$contact_qry = mysql_query("select * from `contact_us`");
+													$contact_qry = $conn->query("select * from `contact_us`");
 
-													while($res = mysql_fetch_array($contact_qry))
+													while($res = $contact_qry->fetch_array())
 
 													{
 

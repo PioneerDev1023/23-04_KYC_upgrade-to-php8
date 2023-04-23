@@ -243,7 +243,7 @@ while($res =  $a){
     $code = $a[$i][0];
 	$name = $a[$i][1];
 	if($code){
-	//$qry = mysql_query("insert into `country` (`country_code`,`country_name`) values('".$code."','".$name."')  ");
+	//$qry = $conn->query("insert into `country` (`country_code`,`country_name`) values('".$code."','".$name."')  ");
 	}
 	$i++;
 }

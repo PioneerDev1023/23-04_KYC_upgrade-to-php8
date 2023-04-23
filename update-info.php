@@ -4,8 +4,8 @@
 	require_once("admin-header.php");
 	
 	
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
-	$admin = mysql_fetch_array($qry);
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$admin = $qry->fetch_array();
 	
 	if(isset($_REQUEST['update_image']))
 	{
@@ -15,7 +15,7 @@
 		
 		move_uploaded_file($_FILES['image']['tmp_name'],'documents/'.$file_name);
 		
-		$qry = mysql_query("update `users` set `image`='".$file_name."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
+		$qry = $conn->query("update `users` set `image`='".$file_name."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
 		
 		$message = "Image updated successfully.";
 		$_SESSION['message'] = $message;
@@ -66,7 +66,7 @@
 		}
 		else
 		{
-			$qry = mysql_query("update `users` set `password`='".md5($npassword)."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
+			$qry = $conn->query("update `users` set `password`='".md5($npassword)."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
 			$message = "Password changed successfully.";
 			$_SESSION['message'] = $message;
 			$url = "update-info.php";
@@ -86,7 +86,7 @@
 	{
 			$email = $_REQUEST['email'];
 			$user_name = $_REQUEST['user_name'];
-			$qry = mysql_query("update `users` set `user_name`='".$user_name."',`email`='".$email."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
+			$qry = $conn->query("update `users` set `user_name`='".$user_name."',`email`='".$email."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
 			$message = "Profile updated successfully.";
 			$_SESSION['message'] = $message;
 			$url = "update-info.php";
@@ -103,7 +103,7 @@
 	{
 		$sitekey = $_REQUEST['sitekey'];
 		$status = $_REQUEST['status'];
-		$qry = mysql_query("update `site_setting` set `status`='".$status."',`sitekey`='".$sitekey."' where `site_setting_id`='1' ");
+		$qry = $conn->query("update `site_setting` set `status`='".$status."',`sitekey`='".$sitekey."' where `site_setting_id`='1' ");
 			$message = "Site setting updated successfully.";
 			$_SESSION['message'] = $message;
 			$url = "update-info.php";
@@ -121,7 +121,7 @@
 		$email = $_REQUEST['email'];
 		$password = $_REQUEST['password'];
 		
-		$qry = mysql_query("update `site_setting` set `email`='".$email."', `password`='".$password."' where `site_setting_id`='2' ");
+		$qry = $conn->query("update `site_setting` set `email`='".$email."', `password`='".$password."' where `site_setting_id`='2' ");
 			$message = "SMTP updated successfully.";
 			$_SESSION['message'] = $message;
 			$url = "update-info.php";
@@ -274,8 +274,8 @@
                                                         <form action="" method="post">
                                                         
                                                         	<?php
-																$site_setting_qry = mysql_query("select * from `site_setting` where `site_setting_id`='1' ");
-																$site_setting_data = mysql_fetch_array($site_setting_qry);
+																$site_setting_qry = $conn->query("select * from `site_setting` where `site_setting_id`='1' ");
+																$site_setting_data = $site_setting_qry->fetch_array();
 															?>
                                                         	<div class="form-group">
                                                                 <label class="control-label">Name</label>
@@ -298,8 +298,8 @@
                                                         <form action="" method="post">
                                                         
                                                         	<?php
-																$site_setting_qry = mysql_query("select * from `site_setting` where `site_setting_id`='2' ");
-																$site_setting_data = mysql_fetch_array($site_setting_qry);
+																$site_setting_qry = $conn->query("select * from `site_setting` where `site_setting_id`='2' ");
+																$site_setting_data = $site_setting_qry->fetch_array();
 															?>
                                                         	<div class="form-group">
                                                                 <label class="control-label">Name</label>

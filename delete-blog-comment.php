@@ -4,7 +4,7 @@
 
 	$blog_comment_id = $_REQUEST['blog_comment_id'];
 
-	$qry = mysql_query("delete from `blog_comment` where `blog_comment_id`='".$blog_comment_id."'  ");
+	$qry = $conn->query("delete from `blog_comment` where `blog_comment_id`='".$blog_comment_id."'  ");
 
 		
 

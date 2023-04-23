@@ -172,13 +172,13 @@
 
                                                 <?php
 
-													$qry = mysql_query("select * from `kyc_list`");
+													$qry = $conn->query("select * from `kyc_list`");
 
-													while($res =  mysql_fetch_array($qry)){
+													while($res =  $qry->fetch_array()){
 
-														$country_qry = mysql_query("select * from `country` where `country_id`='".$res['country_id']."' ");
+														$country_qry = $conn->query("select * from `country` where `country_id`='".$res['country_id']."' ");
 
-														$country_data = mysql_fetch_array($country_qry);
+														$country_data = $country_qry->fetch_array();
 
 												?>
 

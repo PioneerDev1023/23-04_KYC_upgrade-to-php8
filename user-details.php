@@ -46,15 +46,15 @@
 
                                                 <?php
 
-													$user_qry = mysql_query("select * from `users` where `user_id`='".$_REQUEST['user_id']."' ");
+													$user_qry = $conn->query("select * from `users` where `user_id`='".$_REQUEST['user_id']."' ");
 
-													$user_data = mysql_fetch_array($user_qry);
+													$user_data = $user_qry->fetch_array();
 
 													
 
-													$country_qry = mysql_query("select * from `country` where `country_id`='".$user_data['country_id']."' ");
+													$country_qry = $conn->query("select * from `country` where `country_id`='".$user_data['country_id']."' ");
 
-													$country_data = mysql_fetch_array($country_qry);
+													$country_data = $country_qry->fetch_array();
 
 												?>
 
@@ -142,19 +142,19 @@
                                                         <div class="progress-info">
                                                             <?php
                                                                     $user_uploaded_doc = 0;
-                                                                    $user_doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$user_data['user_id']."' ");
+                                                                    $user_doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$user_data['user_id']."' ");
                 
-                                                                     while($data =  mysql_fetch_array($user_doc_qry)){
+                                                                     while($data =  $user_doc_qry->fetch_array()){
                                                                         $user_uploaded_doc++;
                                                                      }
 																	 
-																	 $d_qry = mysql_query("select * from `dynamic_value` where `user_id`='".$user_data['user_id']."' ");
-																	 while($d_data =  mysql_fetch_array($d_qry)){
+																	 $d_qry = $conn->query("select * from `dynamic_value` where `user_id`='".$user_data['user_id']."' ");
+																	 while($d_data =  $d_qry->fetch_array()){
 																		$user_uploaded_doc++;	
 																	 }
                 
-                                                                     $kyc_list_qry = mysql_query("select * from `kyc_list` where `country_id`='".$country_data['country_id']."' and `region_name`='".$user_data['region']."' ");
-                                                                     $kyc_data = mysql_fetch_array($kyc_list_qry);
+                                                                     $kyc_list_qry = $conn->query("select * from `kyc_list` where `country_id`='".$country_data['country_id']."' and `region_name`='".$user_data['region']."' ");
+                                                                     $kyc_data = $kyc_list_qry->fetch_array();
                                                                      $docs = trim($kyc_data['document_list'],",");
                                                                      $doc = explode(",",$docs);
                 
@@ -228,9 +228,9 @@
 
                                                 <?php
 
-													$doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$user_data['user_id']."' ");
+													$doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$user_data['user_id']."' ");
 
-													while($doc_data = mysql_fetch_array($doc_qry)){
+													while($doc_data = $doc_qry->fetch_array()){
 
 												?>    
 
@@ -250,9 +250,9 @@
                                                 
                                                 <?php
 
-													$d_qry = mysql_query("select * from `dynamic_value` where `user_id`='".$user_data['user_id']."' ");
+													$d_qry = $conn->query("select * from `dynamic_value` where `user_id`='".$user_data['user_id']."' ");
 
-													while($d_data = mysql_fetch_array($d_qry)){
+													while($d_data = $d_qry->fetch_array()){
 
 												?>    
 

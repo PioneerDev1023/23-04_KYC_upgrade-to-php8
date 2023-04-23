@@ -4,9 +4,9 @@
 
 	require_once("head.php");
 	
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user = mysql_fetch_array($qry);
+	$user = $qry->fetch_array();
 	
 	
 	if(isset($_REQUEST['login']))
@@ -14,8 +14,8 @@
 		$email = $_REQUEST['email'];
 		$password = $_REQUEST['password'];
 		
-		$qry = mysql_query("select * from `users` where `email`='".$email."' and `password`='".md5($password)."' ");
-		$res = mysql_fetch_array($qry);
+		$qry = $conn->query("select * from `users` where `email`='".$email."' and `password`='".md5($password)."' ");
+		$res = $qry->fetch_array();
 		
 		if($res)
 		{

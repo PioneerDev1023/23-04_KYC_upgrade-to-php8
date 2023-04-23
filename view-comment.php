@@ -2,9 +2,9 @@
 require_once("conn.php");
 require_once("user-head.php");
 //require_once("user-header.php");
-$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-$user = mysql_fetch_array($qry);
+$user = $qry->fetch_array();
 
 if(!$user || $user['type'] != 0)
 	{
@@ -30,7 +30,7 @@ if(isset($_REQUEST['comment_save'])){
 		$comment = $_REQUEST['comment'];
 		$user_id = $_SESSION['user_id'];
 		
-		$contact_qry = mysql_query("insert into `blog_comment` (`blog_id`,`user_id`,`comment`,`added_date`) values('".$blog_id."','".$user_id."','".$comment."','".date('Y-m-d H:i:s')."') ");
+		$contact_qry = $conn->query("insert into `blog_comment` (`blog_id`,`user_id`,`comment`,`added_date`) values('".$blog_id."','".$user_id."','".$comment."','".date('Y-m-d H:i:s')."') ");
 
 		$message = "Comment send successfully.";
 
@@ -329,9 +329,9 @@ if(isset($_REQUEST['comment_save'])){
                             	
                                 <?php
 								
-									$blog_qry = mysql_query("select * from `blog` where `blog_id`='".$blog_id."' ");
+									$blog_qry = $conn->query("select * from `blog` where `blog_id`='".$blog_id."' ");
 									
-									$blog_res = mysql_fetch_array($blog_qry);
+									$blog_res = $blog_qry->fetch_array();
 									
 									
 								?>
@@ -365,14 +365,14 @@ if(isset($_REQUEST['comment_save'])){
                                 
                                 <?php
 								
-                                $comment_qry = mysql_query("select * from `blog_comment` where `blog_id`='".$blog_id."' ");
+                                $comment_qry = $conn->query("select * from `blog_comment` where `blog_id`='".$blog_id."' ");
 
-								while($comment_res = mysql_fetch_array($comment_qry))																
+								while($comment_res = $comment_qry->fetch_array())																
                                 {
 									
-									$comment_user_qry = mysql_query("select * from `users` where `user_id`='".$comment_res['user_id']."' ");
+									$comment_user_qry = $conn->query("select * from `users` where `user_id`='".$comment_res['user_id']."' ");
 
-									$comment_user_data = mysql_fetch_array($comment_user_qry);
+									$comment_user_data = $comment_user_qry->fetch_array();
 								?> 
                                 
                                    <div class="col-sm-2">

@@ -24,7 +24,7 @@
 		
 		
 
-		$qry = mysql_query("insert into `blog` (`blog_title`,`blog_image`,`blog_content`,`added_date`) values('".$blog_title."','".$file_name."','".$blog_content."','".date('Y-m-d H:i:s')."')  ");
+		$qry = $conn->query("insert into `blog` (`blog_title`,`blog_image`,`blog_content`,`added_date`) values('".$blog_title."','".$file_name."','".$blog_content."','".date('Y-m-d H:i:s')."')  ");
 
 		
 

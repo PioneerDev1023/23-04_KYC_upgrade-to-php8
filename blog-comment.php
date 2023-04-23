@@ -168,12 +168,12 @@
 
                                                 <?php
 
-													$qry = mysql_query("select * from `blog_comment` where `blog_id` = '".$_REQUEST['blog_id']."' ");
+													$qry = $conn->query("select * from `blog_comment` where `blog_id` = '".$_REQUEST['blog_id']."' ");
 
-													while($res =  mysql_fetch_array($qry)){
+													while($res =  $qry->fetch_array()){
 
-														$user_qry = mysql_query("select * from `users` where `user_id` = '".$res['user_id']."' ");
-														$user_data = mysql_fetch_array($user_qry);
+														$user_qry = $conn->query("select * from `users` where `user_id` = '".$res['user_id']."' ");
+														$user_data = $user_qry->fetch_array();
 												?>
 
                                                 <tr>

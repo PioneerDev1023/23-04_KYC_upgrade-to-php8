@@ -172,9 +172,9 @@
 
                                                 <?php
 
-													$qry = mysql_query("select * from `blog`");
+													$qry = $conn->query("select * from `blog`");
 
-													while($res =  mysql_fetch_array($qry)){
+													while($res =  $qry->fetch_array()){
 
 														
 												?>

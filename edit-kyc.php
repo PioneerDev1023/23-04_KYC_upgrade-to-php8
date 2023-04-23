@@ -47,12 +47,12 @@
 
 		
 
-		$qry = mysql_query("update `kyc_list` set  `country_id`='".$country_id."', `region_name`='".$region_name."', `document_list`='".$document_list."',`radio_button`='".$radio_button_list."',`checkbox`='".$checkbox_list."',`text_field`='".$text_field_list."',`checkbox_label`='".$_REQUEST['checkbox_label']."',`updated_date`='".date('Y-m-d H:i:s')."' where `kyc_list_id`='".$kyc_list_id."'  ");
+		$qry = $conn->query("update `kyc_list` set  `country_id`='".$country_id."', `region_name`='".$region_name."', `document_list`='".$document_list."',`radio_button`='".$radio_button_list."',`checkbox`='".$checkbox_list."',`text_field`='".$text_field_list."',`checkbox_label`='".$_REQUEST['checkbox_label']."',`updated_date`='".date('Y-m-d H:i:s')."' where `kyc_list_id`='".$kyc_list_id."'  ");
 
 		
-		$user_qry = mysql_query("select * from `users` where `country_id`='".$country_id."' ");
+		$user_qry = $conn->query("select * from `users` where `country_id`='".$country_id."' ");
 		
-		while($user_data = mysql_fetch_array($user_qry))
+		while($user_data = $user_qry->fetch_array())
 		{
 			$mail = new PHPMailer; 
 
@@ -151,9 +151,9 @@
 
 	
 
-	$qry = mysql_query("select * from `kyc_list` where `kyc_list_id`='".$kyc_list_id."' ");
+	$qry = $conn->query("select * from `kyc_list` where `kyc_list_id`='".$kyc_list_id."' ");
 
-	$data = mysql_fetch_array($qry);
+	$data = $qry->fetch_array();
 
 	
 
@@ -305,9 +305,9 @@
 
                                                 <?php
 
-													$country = mysql_query("select * from `country`");
+													$country = $conn->query("select * from `country`");
 
-													while($res = mysql_fetch_array($country)){
+													while($res = $country->fetch_array()){
 
 														if($res['country_id'] == $data['country_id'])
 

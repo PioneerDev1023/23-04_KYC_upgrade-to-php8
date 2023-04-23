@@ -2,9 +2,9 @@
 require_once("conn.php");
 require_once("user-head.php");
 //require_once("user-header.php");
-$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-$user = mysql_fetch_array($qry);
+$user = $qry->fetch_array();
 
 if(!$user || $user['type'] != 0)
 	{
@@ -31,7 +31,7 @@ if(isset($_REQUEST['contact_save'])){
 		$contact = $_REQUEST['contact'];
 		$comment = $_REQUEST['comment'];
 		
-		$contact_qry = mysql_query("insert into `contact_us` (`name`,`email`,`contact`,`comment`,`added_date`) values('".$name."','".$email."','".$contact."','".$comment."','".date('Y-m-d H:i:s')."') ");
+		$contact_qry = $conn->query("insert into `contact_us` (`name`,`email`,`contact`,`comment`,`added_date`) values('".$name."','".$email."','".$contact."','".$comment."','".date('Y-m-d H:i:s')."') ");
 
 		$message = "Contact form submited successfully. we'll contact you soon. ";
 

@@ -8,15 +8,15 @@
 
 	
 
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user = mysql_fetch_array($qry);
+	$user = $qry->fetch_array();
 
 	
 
-	$user_doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
+	$user_doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user_doc_res = mysql_fetch_array($user_doc_qry);
+	$user_doc_res = $user_doc_qry->fetch_array();
 
 	
 
@@ -82,7 +82,7 @@
 
 			
 
-			$qry = mysql_query("insert into `user_documents` (`doc_name`,`doc_number`,`doc_file_name`,`user_id`,`added_date`) values('".$doc_name[$i]."','".$doc_number[$i]."','".$file_name."','".$_SESSION['user_id']."','".date('Y-m-d H:i:s')."') ");
+			$qry = $conn->query("insert into `user_documents` (`doc_name`,`doc_number`,`doc_file_name`,`user_id`,`added_date`) values('".$doc_name[$i]."','".$doc_number[$i]."','".$file_name."','".$_SESSION['user_id']."','".date('Y-m-d H:i:s')."') ");
 
 			
 
@@ -96,7 +96,7 @@
 		foreach($_POST['radio-group'] as $value)
 		{
 			
-			$qry = mysql_query("insert into `dynamic_value` (`user_id`,`type`,`name`,`value`,`added_date`) values('".$_SESSION['user_id']."','1','".$radio_name[$i]['radio_name']."','".$value['radio']."','".date('Y-m-d H:i:s')."')  ");
+			$qry = $conn->query("insert into `dynamic_value` (`user_id`,`type`,`name`,`value`,`added_date`) values('".$_SESSION['user_id']."','1','".$radio_name[$i]['radio_name']."','".$value['radio']."','".date('Y-m-d H:i:s')."')  ");
 			$i++;
 		}
 		
@@ -106,7 +106,7 @@
 		foreach($_POST['checkbox-group'] as $value)
 		{
 			
-			$qry = mysql_query("insert into `dynamic_value` (`user_id`,`type`,`name`,`value`,`added_date`) values('".$_SESSION['user_id']."','2','".$checkbox_name[$i]['checkbox_name']."','".$value['checkbox']."','".date('Y-m-d H:i:s')."')  ");
+			$qry = $conn->query("insert into `dynamic_value` (`user_id`,`type`,`name`,`value`,`added_date`) values('".$_SESSION['user_id']."','2','".$checkbox_name[$i]['checkbox_name']."','".$value['checkbox']."','".date('Y-m-d H:i:s')."')  ");
 			$i++;
 		}
 		
@@ -115,7 +115,7 @@
 		foreach($_POST['text-group'] as $value)
 		{
 			
-			$qry = mysql_query("insert into `dynamic_value` (`user_id`,`type`,`name`,`value`,`added_date`) values('".$_SESSION['user_id']."','3','".$text_name[$i]['text_name']."','".$value['text']."','".date('Y-m-d H:i:s')."')  ");
+			$qry = $conn->query("insert into `dynamic_value` (`user_id`,`type`,`name`,`value`,`added_date`) values('".$_SESSION['user_id']."','3','".$text_name[$i]['text_name']."','".$value['text']."','".date('Y-m-d H:i:s')."')  ");
 			$i++;
 		}
 		
@@ -245,13 +245,13 @@
 																		$remain_checkbox = array();
 																		$remain_textfield = array();
 
-																		$user_doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
-																		while($data =  mysql_fetch_array($user_doc_qry)){
+																		$user_doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
+																		while($data =  $user_doc_qry->fetch_array()){
 																			 array_push($user_uploaded_doc_array,$data['doc_name']);
 																		}
 																		
-																		$d_qry = mysql_query("select * from `dynamic_value` where `user_id`='".$_SESSION['user_id']."' ");
-																		while($d_data =  mysql_fetch_array($d_qry)){
+																		$d_qry = $conn->query("select * from `dynamic_value` where `user_id`='".$_SESSION['user_id']."' ");
+																		while($d_data =  $d_qry->fetch_array()){
 																			 if($d_data['type'] == 1){
 																			 	array_push($user_uploaded_radio_array,$d_data['name']);
 																			 }
@@ -265,9 +265,9 @@
 
 																		 
 																		 
-																		 $kyc_list_qry = mysql_query("select * from `kyc_list` where `country_id`='".$user['country_id']."' and `region_name`='".$user['region']."' ");
+																		 $kyc_list_qry = $conn->query("select * from `kyc_list` where `country_id`='".$user['country_id']."' and `region_name`='".$user['region']."' ");
 
-																		 $kyc_data = mysql_fetch_array($kyc_list_qry);
+																		 $kyc_data = $kyc_list_qry->fetch_array();
 																		 
 																		 $docs = trim($kyc_data['document_list'],",");
 																		 $doc = explode(",",$docs);

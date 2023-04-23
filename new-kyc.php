@@ -40,7 +40,7 @@
 		}
 
 		
-		$qry = mysql_query("insert into `kyc_list` (`country_id`,`region_name`,`document_list`,`radio_button`,`checkbox`,`text_field`,`checkbox_label`,`added_date`) values('".$country_id."','".$region_name."','".$document_list."','".$radio_button_list."','".$checkbox_list."','".$text_field_list."','".$_REQUEST['checkbox_label']."','".date('Y-m-d H:i:s')."')  ");
+		$qry = $conn->query("insert into `kyc_list` (`country_id`,`region_name`,`document_list`,`radio_button`,`checkbox`,`text_field`,`checkbox_label`,`added_date`) values('".$country_id."','".$region_name."','".$document_list."','".$radio_button_list."','".$checkbox_list."','".$text_field_list."','".$_REQUEST['checkbox_label']."','".date('Y-m-d H:i:s')."')  ");
 
 		
 
@@ -219,9 +219,9 @@
 
                                                 <?php
 
-													$country = mysql_query("select * from `country`");
+													$country = $conn->query("select * from `country`");
 
-													while($res = mysql_fetch_array($country)){
+													while($res = $country->fetch_array()){
 
 												?>
 

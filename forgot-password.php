@@ -14,9 +14,9 @@
 		
 		
 		
-		$qry = mysql_query("select * from `users` where `verify_reg_code`='".$verify_reg_code."' ");
+		$qry = $conn->query("select * from `users` where `verify_reg_code`='".$verify_reg_code."' ");
 
-		$res = mysql_fetch_array($qry);
+		$res = $qry->fetch_array();
 		
 		
 
@@ -58,7 +58,7 @@
 
 		{
 
-			$qry = mysql_query("update `users` set `password`='".md5($password)."',`verify_reg_code`='".uniqid()."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$res['user_id']."' ");
+			$qry = $conn->query("update `users` set `password`='".md5($password)."',`verify_reg_code`='".uniqid()."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$res['user_id']."' ");
 
 			$message = "Password changed successfully.";
 

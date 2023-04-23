@@ -2,9 +2,9 @@
 require_once("conn.php");
 require_once("user-head.php");
 //require_once("user-header.php");
-$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-$user = mysql_fetch_array($qry);
+$user = $qry->fetch_array();
 
 if(!$user || $user['type'] != 0)
 	{
@@ -267,13 +267,13 @@ if(!$user || $user['type'] != 0)
                             	
                                 <?php
 								
-									$blog_qry = mysql_query("select * from `blog` ");
+									$blog_qry = $conn->query("select * from `blog` ");
 									
-									while($blog_res = mysql_fetch_array($blog_qry)){
+									while($blog_res = $blog_qry->fetch_array()){
 									
-									$comment_qry = mysql_query("select * from `blog_comment` where `blog_id`='".$blog_res['blog_id']."' ");
+									$comment_qry = $conn->query("select * from `blog_comment` where `blog_id`='".$blog_res['blog_id']."' ");
 
-									$total_comment = mysql_num_rows($comment_qry);																
+									$total_comment = $comment_qry->num_rows;																
 								?>
                                 
                             

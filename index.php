@@ -9,8 +9,8 @@
 		$email = $_REQUEST['email'];
 		$password = $_REQUEST['password'];
 		
-		$qry = mysql_query("select * from `users` where `email`='".$email."' and `password`='".md5($password)."' ");
-		$res = mysql_fetch_array($qry);
+		$qry = $conn->query("select * from `users` where `email`='".$email."' and `password`='".md5($password)."' ");
+		$res = $qry->fetch_array();
 		
 		if($res)
 		{
@@ -47,8 +47,8 @@
 	{
 		
 		$email = $_REQUEST['email'];
-		$qry = mysql_query("select * from `users` where `email`='".$email."' ");
-		$res = mysql_fetch_array($qry);
+		$qry = $conn->query("select * from `users` where `email`='".$email."' ");
+		$res = $qry->fetch_array();
 		
 		if($res)
 		{
@@ -75,7 +75,7 @@
 			$rpassword = $_REQUEST['rpassword'];
 			$verify_reg_code = uniqid();
 			
-			$qry = mysql_query("insert into `users` (`user_name`,`email`,`password`,`region`,`city`,`country_id`,`type`,`verify_reg_code`,`added_date`) values('".$user_name."','".$email."','".md5($password)."','".$region."','".$city."','".$country_id."','0','".$verify_reg_code."','".date('Y-m-d H:i:s')."') ");
+			$qry = $conn->query("insert into `users` (`user_name`,`email`,`password`,`region`,`city`,`country_id`,`type`,`verify_reg_code`,`added_date`) values('".$user_name."','".$email."','".md5($password)."','".$region."','".$city."','".$country_id."','0','".$verify_reg_code."','".date('Y-m-d H:i:s')."') ");
 			
 			
 			
@@ -160,8 +160,8 @@
 	{
 		$email = $_REQUEST['email'];
 		
-		$qry = mysql_query("select * from `users` where `email`='".$email."' ");
-		$res = mysql_fetch_array($qry);
+		$qry = $conn->query("select * from `users` where `email`='".$email."' ");
+		$res = $qry->fetch_array();
 		
 		if($res)
 		{
@@ -173,8 +173,8 @@
 			$headers .= "Content-type: text/html\r\n";
 			$retval = mail($to,$subject,$txt,$headers);*/
 			 
-			$site_setting_qry = mysql_query("select * from `site_setting` where `site_setting_id`='2' ");
-		    $site_setting_data = mysql_fetch_array($site_setting_qry); 
+			$site_setting_qry = $conn->query("select * from `site_setting` where `site_setting_id`='2' ");
+		    $site_setting_data = $site_setting_qry->fetch_array(); 
 			$username = $site_setting_data['email'];
 			$password = $site_setting_data['password'];
 			
@@ -298,8 +298,14 @@
 		}
 	}
 	
-	$captcha_qry = mysql_query("select * from `site_setting` where `site_setting_id`='1' ");
-	$captcha_data = mysql_fetch_array($captcha_qry);
+	$captcha_qry = $conn->query("select * from `site_setting` where `site_setting_id`='1'");
+	$captcha_data = $captcha_qry->fetch_array();
+
+	// $captcha_data = [];
+	// $captcha_query = "SELECT * FROM `site_setting` WHERE `site_setting_id` = '1'";
+
+	// $captcha_data = $result->fetch_assoc();
+	// $result->free();
 ?>
 <style>.login .logo {display:none;}.login .content {margin-top: 30px !important;}</style>
 
@@ -449,10 +455,10 @@
                     <select name="country_id" id="country_list" class="select2 form-control">
                         <option value=""></option>
                         <?php
-							$country = mysql_query("select DISTINCT(`country_id`) from `kyc_list`");
-							while($res = mysql_fetch_array($country)){
-								$country_qry = mysql_query("select * from `country` where `country_id`='".$res['country_id']."' ");
-								$country_data = mysql_fetch_array($country_qry);
+							$country = $conn->query("select DISTINCT(`country_id`) from `kyc_list`");
+							while($res = $country->fetch_array()){
+								$country_qry = $conn->query("select * from `country` where `country_id`='".$res['country_id']."' ");
+								$country_data = $country_qry->fetch_array();
 						?>
 							<option value="<?php echo $country_data['country_id'] ?>" attr_country_code="<?php echo $country_data['country_code'] ?>" ><?php echo $country_data['country_name'] ?></option>
 						<?php } ?>

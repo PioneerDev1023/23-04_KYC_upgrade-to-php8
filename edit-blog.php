@@ -7,8 +7,8 @@
 	require_once("admin-header.php");
 
 	$blog_id = $_REQUEST['blog_id'];
-	$blog_qry = mysql_query("select * from `blog` where `blog_id`='".$blog_id."' ");
-	$blog_data = mysql_fetch_array($blog_qry);
+	$blog_qry = $conn->query("select * from `blog` where `blog_id`='".$blog_id."' ");
+	$blog_data = $blog_qry->fetch_array();
 	
 
 	if(isset($_REQUEST['edit-blog']))
@@ -27,12 +27,12 @@
 		
 		
 
-		$qry = mysql_query("update `blog` set `blog_title`='".$blog_title."', `blog_image`='".$file_name."', `blog_content`='".$blog_content."',`updated_date`='".date('Y-m-d H:i:s')."' where `blog_id`='".$blog_id."' ");
+		$qry = $conn->query("update `blog` set `blog_title`='".$blog_title."', `blog_image`='".$file_name."', `blog_content`='".$blog_content."',`updated_date`='".date('Y-m-d H:i:s')."' where `blog_id`='".$blog_id."' ");
 
 		}
 		else
 		{
-			$qry = mysql_query("update `blog` set `blog_title`='".$blog_title."', `blog_content`='".$blog_content."', `updated_date`='".date('Y-m-d H:i:s')."' where `blog_id`='".$blog_id."' ");
+			$qry = $conn->query("update `blog` set `blog_title`='".$blog_title."', `blog_content`='".$blog_content."', `updated_date`='".date('Y-m-d H:i:s')."' where `blog_id`='".$blog_id."' ");
 		}
 
 		$message = "Blog updated successfully.";

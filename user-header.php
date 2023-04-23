@@ -2,9 +2,9 @@
 
 	require_once("conn.php");
 
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user = mysql_fetch_array($qry);
+	$user = $qry->fetch_array();
 
 	if(!$user || $user['type'] != 0)
 	{
@@ -22,9 +22,9 @@
 		}
 	}	
 
-	$country_qry = mysql_query("select * from `country` where `country_id`='".$user['country_id']."' ");
+	$country_qry = $conn->query("select * from `country` where `country_id`='".$user['country_id']."' ");
 
-	$country = mysql_fetch_array($country_qry);
+	$country = $country_qry->fetch_array();
 
 	
 
@@ -448,21 +448,21 @@
 										<div class="progress-info">
 											<?php
 												    $user_uploaded_doc = 0;
-													$user_doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
+													$user_doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
 
-													 while($data =  mysql_fetch_array($user_doc_qry)){
+													 while($data =  $user_doc_qry->fetch_array()){
 														$user_uploaded_doc++;
 													 }
 													 
-													 $d_qry = mysql_query("select * from `dynamic_value` where `user_id`='".$_SESSION['user_id']."' ");
-													 while($d_data =  mysql_fetch_array($d_qry)){
-														$user_uploaded_doc++;	
-													 }
+													//  $d_qry = $conn->query("select * from `dynamic_value` where `user_id`='".$_SESSION['user_id']."' ");
+													//  while($d_data =  $d_qry->fetch_array()){
+													// 	$user_uploaded_doc++;	
+													//  }
 													 
 													 
 
-													 $kyc_list_qry = mysql_query("select * from `kyc_list` where `country_id`='".$user['country_id']."' and `region_name`='".$user['region']."' ");
-													 $kyc_data = mysql_fetch_array($kyc_list_qry);
+													 $kyc_list_qry = $conn->query("select * from `kyc_list` where `country_id`='".$user['country_id']."' and `region_name`='".$user['region']."' ");
+													 $kyc_data = $kyc_list_qry->fetch_array();
 													 
 													 $docs = trim($kyc_data['document_list'],",");
 													 $doc = explode(",",$docs);

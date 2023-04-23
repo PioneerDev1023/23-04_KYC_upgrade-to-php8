@@ -10,9 +10,9 @@
 
 	
 
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user = mysql_fetch_array($qry);
+	$user = $qry->fetch_array();
 
 	
 
@@ -32,7 +32,7 @@
 
 		
 
-		$qry = mysql_query("update `users` set `image`='".$file_name."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
+		$qry = $conn->query("update `users` set `image`='".$file_name."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
 
 		
 
@@ -134,7 +134,7 @@
 
 		{
 
-			$qry = mysql_query("update `users` set `password`='".md5($npassword)."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
+			$qry = $conn->query("update `users` set `password`='".md5($npassword)."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
 
 			$message = "Password changed successfully.";
 
@@ -174,7 +174,7 @@
 
 			$user_name = $_REQUEST['user_name'];
 
-			$qry = mysql_query("update `users` set `user_name`='".$user_name."',`email`='".$email."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
+			$qry = $conn->query("update `users` set `user_name`='".$user_name."',`email`='".$email."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_id`='".$_SESSION['user_id']."' ");
 
 			$message = "Profile updated successfully.";
 

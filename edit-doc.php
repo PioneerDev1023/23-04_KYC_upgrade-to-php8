@@ -8,15 +8,15 @@
 
 	
 
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user = mysql_fetch_array($qry);
+	$user = $qry->fetch_array();
 
 	
 
-	$user_doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
+	$user_doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$_SESSION['user_id']."' ");
 
-	$user_doc_res = mysql_fetch_array($user_doc_qry);
+	$user_doc_res = $user_doc_qry->fetch_array();
 
 	
 
@@ -82,7 +82,7 @@
 
 			
 
-			$qry = mysql_query("update `user_documents` set `doc_number`='".$doc_number[$i]."',`doc_file_name`='".$file_name."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_document_id`='".$_REQUEST['user_document_id']."' ");
+			$qry = $conn->query("update `user_documents` set `doc_number`='".$doc_number[$i]."',`doc_file_name`='".$file_name."',`updated_date`='".date('Y-m-d H:i:s')."' where `user_document_id`='".$_REQUEST['user_document_id']."' ");
 
 			
 
@@ -168,9 +168,9 @@
 
 																   <?php
 
-                                                                        $doc_qry = mysql_query("select * from `user_documents` where `user_document_id`='".$_REQUEST['user_document_id']."' ");
+                                                                        $doc_qry = $conn->query("select * from `user_documents` where `user_document_id`='".$_REQUEST['user_document_id']."' ");
 
-                                                                        $doc_data = mysql_fetch_array($doc_qry);
+                                                                        $doc_data = $doc_qry->fetch_array();
 
                                                                         
 

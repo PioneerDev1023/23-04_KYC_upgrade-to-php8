@@ -3,8 +3,8 @@
 	require_once("admin-head.php");
 	require_once("admin-header.php");
 	
-	$qry = mysql_query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
-	$admin = mysql_fetch_array($qry);
+	$qry = $conn->query("select * from `users` where `user_id`='".$_SESSION['user_id']."' ");
+	$admin = $qry->fetch_array();
 	
 ?>
         
@@ -21,8 +21,8 @@
                                         <h3 class="font-green-sharp">
                                             <span data-counter="counterup" data-value="7800">
                                             <?php
-												$count_user_qry = mysql_query("select * from `users` where `type`='0' ");
-												echo $count_user_data = mysql_num_rows($count_user_qry);
+												$count_user_qry = $conn->query("select * from `users` where `type`='0' ");
+												echo $count_user_data = $count_user_qry->num_rows;
 											?>
                                             </span>
                                         </h3>
@@ -52,8 +52,8 @@
                                         <h3 class="font-red-haze">
                                             <span data-counter="counterup" data-value="1349">
                                             <?php
-												$count_kyc_qry = mysql_query("select * from `kyc_list` ");
-												echo $count_kyc_data = mysql_num_rows($count_kyc_qry);
+												$count_kyc_qry = $conn->query("select * from `kyc_list` ");
+												echo $count_kyc_data = $count_kyc_qry->num_rows;
 											?>
                                             </span>
                                         </h3>
@@ -84,8 +84,8 @@
                                         <h3 class="font-green-sharp">
                                             <span data-counter="counterup" data-value="7800">
                                             <?php
-												$count_blog_qry = mysql_query("select * from `blog`  ");
-												echo $count_blog_data = mysql_num_rows($count_blog_qry);
+												$count_blog_qry = $conn->query("select * from `blog`  ");
+												echo $count_blog_data = $count_blog_qry->num_rows;
 											?>
                                             </span>
                                         </h3>
@@ -115,8 +115,8 @@
                                         <h3 class="font-red-haze">
                                             <span data-counter="counterup" data-value="1349">
                                             <?php
-												$count_contact_qry = mysql_query("select * from `contact_us` ");
-												echo $count_contact_data = mysql_num_rows($count_contact_qry);
+												$count_contact_qry = $conn->query("select * from `contact_us` ");
+												echo $count_contact_data = $count_contact_qry->num_rows;
 											?>
                                             </span>
                                         </h3>

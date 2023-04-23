@@ -125,15 +125,15 @@
 
                                                 <?php
 
-													$report_qry = mysql_query("select * from `users` where `type`='0' ");
+													$report_qry = $conn->query("select * from `users` where `type`='0' ");
 
-													while($res = mysql_fetch_array($report_qry))
+													while($res = $report_qry->fetch_array())
 
 													{
 
-														$country_qry = mysql_query("select * from `country` where `country_id`='".$res['country_id']."' ");
+														$country_qry = $conn->query("select * from `country` where `country_id`='".$res['country_id']."' ");
 
-														$country_data = mysql_fetch_array($country_qry);
+														$country_data = $country_qry->fetch_array();
 
 												?>
 
@@ -150,8 +150,8 @@
                                                     <td> <?php echo $res['added_date'] ?> </td>
                                                     
                                                     <td><?php
-															$doc_qry = mysql_query("select * from `user_documents` where `user_id`='".$res['user_id']."' ");
-															while($doc_data = mysql_fetch_array($doc_qry)){
+															$doc_qry = $conn->query("select * from `user_documents` where `user_id`='".$res['user_id']."' ");
+															while($doc_data = $doc_qry->fetch_array()){
 														 ?><?php echo $base_url ?>/documents/<?php echo $doc_data['doc_file_name']; ?> |
 														 <?php  } ?>
                                                     </td>

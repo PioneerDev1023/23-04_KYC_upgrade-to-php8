@@ -1,7 +1,7 @@
 <?php
 	require_once("conn.php");
 	$kyc_list_id = $_REQUEST['kyc_list_id'];
-	$qry = mysql_query("delete from `kyc_list` where `kyc_list_id`='".$kyc_list_id."'  ");
+	$qry = $conn->query("delete from `kyc_list` where `kyc_list_id`='".$kyc_list_id."'  ");
 		
 	$message = "KYC form deleted successfully.";
 	$_SESSION['message'] = $message;
